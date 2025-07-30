@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (the default branch of your repository)
+
+media_folder: "public/images/uploads" # Folder where uploaded files will be stored
+public_folder: "/images/uploads" # The public path for uploaded files in the frontend
+
+collections:
+  - name: "posts" # A friendly name for the collection
+    label: "Posts" # The name for the collection in the UI
+    folder: "content/posts" # The path to the folder where content files are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template: YYYY-MM-DD-title.md
+    fields: # The fields for content in this collection
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Publish Date", name: "date", widget: "datetime", required: true, format: "YYYY-MM-DDTHH:mm:ss", date_format: "YYYY-MM-DD", time_format: "HH:mm:ss", picker_utc: true}
+      - {label: "Category", name: "category", widget: "select", options: ["Latest Job", "Admit Card", "Result"], default: "Latest Job"}
+      - {label: "Short Description", name: "description", widget: "string", required: false}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown", required: true}
